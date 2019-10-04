@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Hello Vue!</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="intro">
+        <h1>{{msg}}</h1>
+        <h2>First name: {{firstName}}</h2>
+        <h2>Last name: {{lastName}}</h2>
+        <h2>Age: {{age}}</h2>
+        <h2>Full name: {{fullName()}}</h2>
+        <h2>Peso: {{weight}} kgs</h2>
+
+    </div>
+
+    <script>
+        const vm = new Vue({
+            el: "#intro",
+            data: {
+                msg: "Hello Vue!",
+                firstName: "Bruno",
+                lastName: "Justa",
+                age: "21",
+                weight: "75"
+
+
+
+            },
+            methods: {
+                fullName: function() {
+                    return `${this.firstName} ${this.lastName} `
+                }
+
+            }
+        })
+    </script>
+</body>
+
+</html>
