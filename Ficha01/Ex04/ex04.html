@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+</head>
+
+<body>
+    <div id="intro">
+        <h1>Nome: {{productName}}</h1>
+        <h2 v-html = "productDesc"></h2>
+        <h2>Imagem: <img v-bind:src="productImage" height="100px" width="150px"></h2>
+        <h2 v-if="productPrice<1000">Price:{{productPrice}}</h2>
+        <button v-on:click="restorePrice">CLICK IF U DARE!</button> <!--  SAME SHIT  <button @click="restorePrice">CLICK IF U DARE!</button> -->
+        <h2>Disponibilidade: {{productAvailability ? "DISPONÍVEL" : "NÃO DISPONÍVEL"}}</h2>
+        <button v-bind:disabled="!productAvailability" v-on:click="buyProduct">BUY ME LOSER!</button>
+    </div>
+    <script>
+        const vm = new Vue({
+            el: "#intro",
+            data: {
+                productName: "Computador Titan W599",
+                productDesc: "Processador i7 <br> Disco SSD 256 GB<br>Monitor Samsung 21’",
+                productImage: "https://cdn.vox-cdn.com/thumbor/Vg038cZnYl_JSqxay4OiR6TBuC0=/0x0:1429x762/1200x800/filters:focal(601x267:829x495)/cdn.vox-cdn.com/uploads/chorus_image/image/63136628/Screen_Shot_2019_02_27_at_11.26.15_AM.0.png",
+                productPrice: 1200,
+                productAvailability: true
+            },
+            methods:{
+                restorePrice: function(){
+                    this.productPrice = 1200
+                },
+                buyProduct: function(){
+                    this.productAvailability = false
+                    
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

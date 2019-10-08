@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+</head>
+
+<body>
+    <div id="intro">
+        Pessoas: {{person}}
+        <p>Invocação do metodo: {{dataPerson()}}</p>
+        <p>Invocação do metodo2: {{dataPerson()}}</p>
+        <p>Invocação do PC: {{dataPersonComputed}}</p>
+        <p>Invocação do PC2: {{dataPersonComputed}}</p>
+        <p>Nome Completo: {{fullNameComputed}}</p>
+        <p>Dinheiro: {{person.balance | formatBalance()}}</p>
+    </div>
+</body>
+<script src="ex01.js"></script>
+
+</html>
