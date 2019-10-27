@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>SAMPLE_EX</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+            table,
+            td,
+            th {
+                border: 1px solid black;
+                border-collapse: collapse
+            }
+        </style>
+</head>
+
+<body>
+    <div id="intro">
+        <form @submit.prevent="getReport()">
+            <!-- Tarefa-->
+            <label for="task">Tarefa:</label>
+            <input id="task" v-model="desc">
+            <br>
+            <br>
+            <!-- GÉNERO -->
+            <p>Tipo:</p>
+            <input type="radio" id="personal" value="Pessoal" v-model="type">
+            <label for="personal">Pessoal</label>
+            <br>
+            <input type="radio" id="work" value="Trabalho" v-model="type">
+            <label for="work">Trabalho</label>
+            <br>
+            <br>
+    
+            <input type="submit" value="SUBMETER">      
+        </form>
+        <dialog id="dlgReport"></dialog>
+
+            <span v-if="this.tasks.length===0">
+                SEM TAREFAS
+            </span>
+            <table v-else>
+                <tr>
+                    <th>Tipo</th>
+                    <th>Tarefa</th>
+                    <th>Ações</th>
+                </tr>
+                <tr v-for="task in tasks">
+                    <td>{{task.type}}</td>
+                    <td>{{task.desc}}</td>
+                    <td><button @click="removeTask(task.id)">REMOVER</button></td>
+
+                </tr>
+            </table>
+            <br>
+            <br>
+            <p>FILTROS: </p>
+            <button v-on:click="filterTasks('Pessoal')">Tarefas Profissionais</button>
+            <br>           
+            <button v-on:click="filterTasks('Trabalho')">Tarefas de Trabalho</button>
+       
+
+    </div>
+    <script src="F06ex01.js"></script>
+</body>
+
+</html>

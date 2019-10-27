@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+
+    <div id="intro">
+
+        <button @click="showMSG()">Mostra Mensagem sem parametros</button>
+        <button @click="showMSG2('ESMAD')">Mostra Mensagem c/parametros</button>
+        <button @click="showMSG3">Mostra Mensagem do evento</button>
+<hr>
+        <div v-on:click="bubbling">
+            <button @click="showMSG()">Mostra Mensagem + bubbling </button>
+            <button @click.stop="showMSG()">Mostra Mensagem only msg</button>
+            <button @click.once="showMSG()">Mostra Mensagem once then bubbling </button>
+        </div>
+        <hr>
+
+        <button @keyup.tab="showMSG()">Mostra Mensagem once then bubbling </button>
+
+
+    </div>
+    <script>
+        const vm = new Vue({
+            el: "#intro",
+            data: {
+                msg: "Programação Web I"
+            },
+            methods: {
+                showMSG() {
+                    alert(this.msg)
+                },
+                showMSG2(newMSG) {
+                    alert(newMSG)
+                },
+                showMSG3(event) {
+                    alert(event.target.tagName)
+                    console.log(event)
+                    console.log(event.type)
+                },
+                bubbling() {
+                    alert("bubbling")
+                }
+            }
+        })
+    </script>
+
+</body>
+
+</html>

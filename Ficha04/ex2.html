@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+
+    <div id="intro">
+        <ul v-if="schools.length">
+            <h1>{{schools.length}} Escolas do IPP</h1>
+            <li v-for="school in computedFilterSchools">
+                {{school}}
+            </li>
+        </ul>
+        <p v-else>NÃO HÁ ESCOLAS</p>
+        <button @click="addSchool('ISMAI')">ADICIONAR ESCOLA</button>
+        <button @click="filterSchool('E')">ESCOLAS COM E</button>
+        <button @click="filterSchool('I')">ESCOLAS COM I</button>
+
+
+
+    </div>
+
+
+    <script>
+        const vm = new Vue({
+            el: "#intro",
+            data: {
+                schools: ["ESMAD", "ISEP", "ESE", "ISCAP", "ESTG", "ESS", "ESHT"],
+                char: ""
+            },
+            methods:{
+                addSchool: function(school){
+                    if(!this.schools.includes(school)){
+                        this.schools.push(school)
+                    }
+                    else{
+                        alert("ESCOLA JÁ EXISTE!")
+                    }
+                },
+                filterSchool: function (char) {
+                    this.char = char
+                }
+            },
+            computed:{
+                computedFilterSchools: function () {
+                    return this.schools.filter(
+                        school => school.startsWith(this.char)
+                    )
+                }
+            }
+        })
+    </script>
+
+</body>
+
+</html>

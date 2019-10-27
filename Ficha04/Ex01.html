@@ -12,12 +12,12 @@
 <body>
     <div id="intro">
         <h2
-            v-bind:style="{ color: activeColor, fontSize: fontSize + 'px', 'background-color': backColor, display: show }">
+            v-bind:style="{ color: activeColor, fontSize: fontSize + 'px', 'background-color': backColor, visibility: show }">
             {{msg}}</h2>
         <button @click=" changeRed(`red`)">RED</button>
         <button @click="changePx(`30`)">BIG</button>
         <button @click="changeY(`yellow`)">YELLOW</button>
-        <button @click="showHide(`none`)">SHOW/HIDE</button>
+        <button @click="showHide(`hidden`)">SHOW/HIDE</button>
     </div>
     <script>
         const vm = new Vue({
@@ -27,7 +27,7 @@
                 activeColor: "black",
                 fontSize: "16px",
                 backColor: "white",
-                show: "block"
+                show: "visible"
             },
             methods: {
                 changeRed: function (color) {
@@ -40,10 +40,10 @@
                     this.backColor = bcolor
                 },
                 showHide: function (vis) {
-                    if (this.show === "block") {
+                    if (this.show === "visible") {
                         this.show = vis
                     } else {
-                        this.show = "block"
+                        this.show = "visible"
                     }
                 },
 

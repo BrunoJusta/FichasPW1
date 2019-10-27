@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+        table,
+        td,
+        th {
+            border: 1px solid black;
+            border-collapse: collapse
+        }
+    </style>
+</head>
+
+<body>
+
+        <div id="intro">
+                <ul>
+                    <li v-for="team in listFilterTeams">
+                        Name: {{team.name}} AND year: {{team.year}}
+                    </li>
+                </ul>
+                <table>
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Year</th>
+                    </tr>
+                    <tr v-for="(team,index) in listFilterTeams">
+                        <td>{{index+1}}</td>
+                        <td>{{team.name}}</td>
+                        <td>{{team.year}}</td>
+                        <td>{{team.location}}</td>
+
+                    </tr>
+                </table>
+                <button v-on:click="addTeam('Braga', 1923, 'Braga')">ADD TEAM</button>
+                <button v-on:click="filterTeams('Lisboa')">TEAMS FROM LISBOA</button>
+                <button v-on:click="filterTeams('Porto')">TEAMS FROM PORTO</button>
+                <button v-on:click="filterTeams('Braga')">TEAMS FROM BRAGA</button>
+                <button v-on:click="filterTeams('')">REFRESH</button>
+
+
+            </div>
+            
+
+
+    <script>
+        const vm = new Vue({
+            el: "#intro",
+            data: {
+                teams: [{
+                        name: "benfica",
+                        year: 1910,
+                        location: "Lisboa"
+                    },
+                    {
+                        name: "porto",
+                        year: 1912,
+                        location: "Porto"
+                    },
+                    {
+                        name: "sporting",
+                        year: 1914,
+                        location: "Lisboa"
+                    }
+                ],
+                loca: ""
+            },
+            methods: {
+                addTeam(name, year, location) {
+                    this.teams.push({
+                        name: name,
+                        year: year,
+                        location: location
+                    })
+                },
+                filterTeams(loca) {
+                    this.loca = loca
+                }
+
+            },
+            computed: {
+                listFilterTeams() {
+                    if(this.loca === ""){
+                        return this.teams
+                    }
+                    else{
+                        return this.teams.filter(
+                        team => team.location === this.loca
+                    )
+                    }
+                   
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

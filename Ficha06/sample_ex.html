@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>SAMPLE_EX</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="intro">
+        <form @submit.prevent="getReport()">
+            <!-- NOME -->
+            <label for="name">Nome:</label>
+            <input id="name" v-model="name">
+            <br>
+            <br>
+            <!-- IDADE -->
+            <label for="age">Idade:</label>
+            <input id="age" v-model.number="age">
+            <!-- GÉNERO -->
+            <br>
+            <br>
+            <p>Género:</p>
+            <input type="radio" id="female" value="Feminino" v-model="gender">
+            <label for="female">Feminino</label>
+            <br>
+            <input type="radio" id="male" value="Masculino" v-model="gender">
+            <label for="male">Masculino</label>
+            <br>
+            <br>
+            <!-- LICENCIATURA -->
+            <label for="licenciatura">Licenciatura em:</label>
+            <select id="licenciatura" v-model="selected">
+                <option disabled value="">Sem Licenciatura</option>
+                <option>Informática</option>
+                <option>Redes</option>
+                <option>Web</option>
+            </select>
+            <br>
+            <br>
+            <!-- LINGUAGENS -->
+            <p>Linguagens:</p>
+            <input type="checkbox" id="idC" value="C" v-model="checkedLanguages">C
+            <br>
+            <input type="checkbox" id="idC#" value="C#" v-model="checkedLanguages">C#
+            <br>        
+            <input type="checkbox" id="idJ" value="Java" v-model="checkedLanguages">Java
+            <br>           
+            <input type="checkbox" id="idJs" value="JS" v-model="checkedLanguages">Javascript
+            <br>            
+            <input type="checkbox" id="idP" value="Python" v-model="checkedLanguages">Python
+            <br>            
+            <input type="checkbox" id="idK" value="Kotlin" v-model="checkedLanguages">Kotlin
+            <br>
+            <br>
+            <br>
+            <!-- MOTIVAÇÃO -->
+            <label for="motivation">Motivação</label>
+            <br>
+            <textarea id="motivation" v-model="motivation" rows="4" cols="50"></textarea>
+            <br>
+            <br>
+
+            <button type="submit" value="SUBMETER">SUBMETER</button>
+
+
+           
+        </form>
+        <dialog id="dlgReport"></dialog>
+
+    </div>
+    <script src="sample_ex.js"></script>
+</body>
+
+</html>
