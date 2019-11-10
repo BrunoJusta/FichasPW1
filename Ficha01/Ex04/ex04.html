@@ -15,7 +15,7 @@
         <h1>Nome: {{productName}}</h1>
         <h2 v-html = "productDesc"></h2>
         <h2>Imagem: <img v-bind:src="productImage" height="100px" width="150px"></h2>
-        <h2 v-if="productPrice<1000">Price:{{productPrice}}</h2>
+        <h2 v-if="productPrice > 1000">Price:{{productPrice}}</h2>
         <button v-on:click="restorePrice">CLICK IF U DARE!</button> <!--  SAME SHIT  <button @click="restorePrice">CLICK IF U DARE!</button> -->
         <h2>Disponibilidade: {{productAvailability ? "DISPONÍVEL" : "NÃO DISPONÍVEL"}}</h2>
         <button v-bind:disabled="!productAvailability" v-on:click="buyProduct">BUY ME LOSER!</button>

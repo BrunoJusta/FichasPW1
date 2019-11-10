@@ -8,13 +8,13 @@
     <title>SAMPLE_EX</title>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <style>
-            table,
-            td,
-            th {
-                border: 1px solid black;
-                border-collapse: collapse
-            }
-        </style>
+        table,
+        td,
+        th {
+            border: 1px solid black;
+            border-collapse: collapse
+        }
+    </style>
 </head>
 
 <body>
@@ -34,34 +34,42 @@
             <label for="work">Trabalho</label>
             <br>
             <br>
-    
-            <input type="submit" value="SUBMETER">      
+
+            <input type="submit" value="SUBMETER">
         </form>
         <dialog id="dlgReport"></dialog>
 
-            <span v-if="this.tasks.length===0">
-                SEM TAREFAS
+        <span v-if="this.tasks.length===0">
+            SEM TAREFAS
+        </span>
+        <div v-else>
+            <span>
+                    <label for="sltFilter">Filtros</label>
+                    <select id="sltFilter" v-model="filter">
+                        <option value="Todos">TODOS</option>
+                        <option value="Pessoal">PESSOAL</option>
+                        <option value="Trabalho">TRABALHO</option>
+                    </select>
             </span>
-            <table v-else>
+            <table>
                 <tr>
                     <th>Tipo</th>
                     <th>Tarefa</th>
                     <th>Ações</th>
                 </tr>
-                <tr v-for="task in tasks">
+                <tr v-for="task in filterTasks">
                     <td>{{task.type}}</td>
                     <td>{{task.desc}}</td>
                     <td><button @click="removeTask(task.id)">REMOVER</button></td>
 
                 </tr>
             </table>
-            <br>
-            <br>
-            <p>FILTROS: </p>
-            <button v-on:click="filterTasks('Pessoal')">Tarefas Profissionais</button>
-            <br>           
-            <button v-on:click="filterTasks('Trabalho')">Tarefas de Trabalho</button>
-       
+        </div>
+
+        <br>
+        <br>
+
+
 
     </div>
     <script src="F06ex01.js"></script>

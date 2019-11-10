@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <style>
+            table,
+            td,
+            th {
+                border: 1px solid black;
+                border-collapse: collapse
+            }
+        </style>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+    <h1>MyTravels</h1>
+    <div id="intro">
+            <!-- CONTINENT -->
+            <label for="txtContinent">CONTINENT:</label>
+            <select id="sltContinent" v-model="continent">
+                <option value="all">ALL</option>
+                <option value="europa">EUROPA</option>
+                <option value="africa">ÁFRICA</option>
+                <option value="asia">ÁSIA</option>
+                <option value="america">AMÉRICA</option>
+                <option value="oceania">OCEANIA</option>
+            </select>
+
+            <!-- COUNTRY -->
+            <label for="txtCountry">COUNTRY:</label>
+            <input id="txtCountry" type="text" v-model="country">
+            <br><br>
+
+            <!-- CITIES -->
+            <label for="txtCities">CITIES:</label>
+            <input id="txtCities" type="text" v-model="cities" placeholder="please separate the cities with a comma">
+            <br><br>
+            <!-- DESCRIPTION -->
+            <label for="txtDesc">DESCRIPTION:</label>
+            <textarea id="txtDesc" v-model="description"></textarea>
+            <br><br>
+            <!-- START DATE -->
+            <label for="txtStartDate">START DATE:</label>
+            <input id="txtStartDate" type="date" v-model="startDate">
+            <br><br>
+            <!-- END DATE -->
+            <label for="txtEndDate">END DATE:</label>
+            <input id="txtEndDate" type="date" v-model="endDate">
+            <br><br>
+            <!-- TYPE -->
+            <input v-model="type" id="rdHolidays" type="radio" value="holidays">
+            <label for="rdHolidays">HOLIDAYS</label>
+            <input v-model="type" id="rdBusiness" type="radio" value="business">
+            <label for="rdBusiness">BUSINESS</label>
+            <br><br>
+            <!-- LINK -->
+            <label for="txtPhoto">PHOTO:</label>
+            <input id="txtPhoto" type="text" v-model="photo">
+
+            <br><br>
+            <button v-on:click="addTravel">ADD TRAVEL</button>
+            <button>FIND TRAVEL</button>
+            <br>
+
+            <span v-if="this.travels.length===0">NO TRAVELS</span>
+            <div v-else>
+                <hr>
+                <!-- FILTERS -->
+                <!-- CONTINENT -->
+                <label for="txtFilterContinent">CONTINENT:</label>
+                <input id="txtFilterContinent" type="text" v-model.lazy="filterContinent">
+                <!-- START DATE -->
+                <label for="txtFilterStartDate">START DATE:</label>
+                <input id="txtFilterStartDate" type="date" v-model.lazy="filterStartDate">
+                <!-- END DATE -->
+                <label for="txtFilterEndDate">END DATE:</label>
+                <input id="txtFilterEndDate" type="date" v-model.lazy="filterEndDate">
+                <hr>
+                <span>LIST OF TRAVELS</span>
+                <button @click="orderByCountry">ORDER BY COUNTRY</button>
+                <button @click="orderByDate">ORDER BY START DATE</button>
+                <hr>
+                <table>
+                    <tr>
+                        <th>#</th>
+                        <th>CONTINENT</th>
+                        <th>COUNTRY</th>
+                        <th>TYPE</th>
+                        <th>ACTIONS</th>
+                    </tr>
+                    <tr v-for="travel in filteredTravels">
+                        <td>{{travel.id}}</td>
+                        <td>{{travel.continent}}</td>
+                        <td>{{travel.country}}</td>
+                        <td>{{travel.type}}</td>
+                        <td>
+                            <button v-on:click="editTravel(travel.id)">EDIT</button>
+                            <button v-on:click="removeTravel(travel.id)">REMOVE</button>
+
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+    </div>
+    <!-- Optional JavaScript -->
+    <script src="ficha07.js"></script>
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </script>
+</body>
+
+</html>

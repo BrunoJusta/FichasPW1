@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>CASTELOS</title>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        .table {
+            width: 50%;
+            text-align: center
+        }
+    </style>
+</head>
+
+<body>
+
+        <div id="intro" class="container">
+                <div class="jumbotron">
+                    <h1 class="display-3">Portugal Castles</h1>
+                    <p class="lead">A very simple app for manage castles</p>
+                    <hr class="my-2">
+                    <p>Add new castle</p>
+                    <form @submit.prevent="addCastle">
+                        <div class="row">
+                            <div class="col">
+                                <input v-model="form.name" type="text" class="form-control" placeholder="name" required>
+                            </div>
+                            <div class="col">
+                                <input v-model="form.link" value="http://www.xxx.pt" type="url" class="form-control"
+                                    placeholder="photo link" required>
+                            </div>
+                        </div>
+                        <br>
+                        <input type="submit" class="btn btn-primary" value="ADD CASTLE">
+                    </form>
+                    <br>
+        
+                    <!-- Dialog for edit castle -->
+                    <dialog id="editCastleDialog">
+                        <form @submit.prevent="updateCastle" method="dialog">
+                            <div class="row">
+                                <div class="col">
+                                    <input v-model="form.editName" type="text" class="form-control" placeholder="name" required>
+                                </div>
+                                <div class="col">
+                                    <input v-model="form.editLink" type="url" class="form-control" placeholder="photo link"
+                                        required>
+                                </div>
+                                <input v-model="form.editId" type="hidden">
+                            </div>
+                            <br>
+                            <button type="submit" class="btn btn-primary">SAVE</button>
+                            <button class="btn btn-primary">CLOSE</button>
+                        </form>
+                    </dialog>
+        
+                    <!-- Dialog for view castle -->
+                    <dialog id="viewCastleDialog">
+                        <div class="text-center">
+                            <p><img v-bind:src="form.link" /></p>
+                            <button @click="closeViewCastle" class="btn btn-primary">CLOSE</button>
+                        </div>
+        
+                    </dialog>
+                    <p>
+                            Filter: <input v-model="form.filterName" type="text" class="form-control" placeholder="name">
+                    </p>
+                    <!--List castles-->
+                    <table class="table table-sm text-left">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>ID</th>
+                                <th @click="orderByName">NAME</th>
+                                <th>OPTIONS</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="castle in filteredCastles">
+                                <td scope="row">{{castle.id}}</td>
+                                <td>{{castle.name}}</td>
+                                <td>
+                                    <button class="btn btn-primary btn-sm" @click="editCastle(castle.id)">EDIT</button>
+                                    <button class="btn btn-primary btn-sm" @click="viewCastle(castle.id)">VIEW</button>
+                                    <button class="btn btn-primary btn-sm" @click="removeCastle(castle.id)">REMOVE</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+        
+                    <!--Array manipulation-->
+                    <span>Array manipulations:</span>
+                    <div class="alert alert-primary" role="alert">
+                        <button class="btn btn-primary btn-sm" @click="manipulateArray('ei')">E.i</button>
+                        <button class="btn btn-primary btn-sm" @click="manipulateArray('eii')">E.ii</button>
+                        <button class="btn btn-primary btn-sm" @click="manipulateArray('eiii')">E.iii</button>
+                        <button class="btn btn-primary btn-sm" @click="manipulateArray('eiv')">E.iv</button>
+                        <button class="btn btn-primary btn-sm" @click="manipulateArray('ev')">E.v</button>
+                        <button class="btn btn-primary btn-sm" @click="manipulateArray('evi')">E.vi</button>
+                        <button class="btn btn-primary btn-sm" @click="manipulateArray('evii')">E.vii</button>
+                        <button class="btn btn-primary btn-sm" @click="manipulateArray('eviii')">E.viii</button>
+                        <button class="btn btn-primary btn-sm" @click="manipulateArray('fi')">F.i</button>
+                        <button class="btn btn-primary btn-sm" @click="manipulateArray('fii')">F.ii</button>
+                        <button class="btn btn-primary btn-sm" @click="manipulateArray('fiii')">F.iii</button>
+                        <button class="btn btn-primary btn-sm" @click="manipulateArray('fiv')">F.iv</button>
+                      </div>
+        
+        
+                </div>
+            </div>
+        
+
+
+
+
+
+    <!-- Optional JavaScript -->
+    <script src="castle.js"></script>
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </script>
+</body>
+
+</html>
