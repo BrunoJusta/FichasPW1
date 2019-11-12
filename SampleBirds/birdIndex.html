@@ -89,7 +89,7 @@
             <h3 v-if="this.birds.length===0" style="font-size: 50px; text-align: center;">NO BIRDS</h3>
 
             <div class="row">
-                <birds-card v-for="b in birds" v-bind:bird="b">
+                <birds-card v-for="b in filteredBirds" v-bind:bird="b">
                 </birds-card>
 
             </div>

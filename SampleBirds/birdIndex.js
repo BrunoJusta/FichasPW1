@@ -27,37 +27,53 @@ Vue.component("birds-card", {
     methods: {
 
         removeBird(id) {
-            let birds = JSON.parse(localStorage.getItem("birds"))
-
             if (confirm("Deseja mesmo remover?")) {
-                birds = birds.filter(
+                vm.birds = vm.birds.filter(
                     (bird) => bird.id !== id
                 )
-                localStorage.setItem("birds", JSON.stringify(birds))
-                location.reload();
+                localStorage.setItem("birds", JSON.stringify(vm.birds))
 
             }
+
 
         },
         editBird(id) {
             document.getElementById("editBirdDialog").showModal()
-            let birds = JSON.parse(localStorage.getItem("birds"))
-            const bird = birds.filter(bird => bird.id === id)[0]
-            document.querySelector("#edN").value = bird.name
-            document.querySelector("#edP").value = bird.photo
+
+            const bird = vm.birds.filter(bird => bird.id === id)[0]
+            vm.form.editId = bird.id
+            vm.form.editName = bird.name
+            vm.form.editLink = bird.photo
         },
         updateBird() {
-            let birds = JSON.parse(localStorage.getItem("birds"))
-            birds.map(
+            vm.birds.map(
                 (bird) => {
-                    if (bird.name === document.querySelector("#edN").value) {
-                        bird.name = document.querySelector("#edN").value
-                        bird.photo = document.querySelector("#edP").value
+                    if (bird.id === vm.form.editId) {
+                        bird.name = vm.form.editName
+                        bird.photo = vm.form.editLink
                     }
                 }
             )
             document.getElementById("editBirdDialog").close()
         },
+    },
+    computed: {
+        // Returns a new array of castles based on the user's filter
+        filteredBirds() {
+            return vm.birds.filter(
+                (bird) => {
+                    let filterBirdResult = true
+                    if (this.filterName !== "") {
+                        filterBirdResult = bird.name.includes(vm.filterName)
+
+                    }
+                    return filterBirdResult
+
+                }
+            )
+
+        }
+
     }
 
 })
