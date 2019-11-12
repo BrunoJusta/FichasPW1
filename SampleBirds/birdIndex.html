@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>BIRDS</title>
+    <!-- Vue -->
+    <script src="./vue-js/vue.js"></script>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        table,
+        td,
+        th {
+            border: 1px solid black;
+            border-collapse: collapse
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="birdApp">
+
+        <div class="container" style="background-color: gray; color: honeydew;">
+            <h1>ADD BIRDS</h1>
+
+            <!-- Bird Name -->
+            <label for="txtName">Name:</label>
+            <input id="txtName" type="text" v-model="name">
+            <br><br>
+
+            <!-- Scientific Name -->
+            <label for="txtScientific">Scientific Name:</label>
+            <input id="txtScientific" type="text" v-model="scientific">
+            <br><br>
+
+            <!-- DESCRIPTION -->
+            <label for="txtDesc">DESCRIPTION:</label>
+            <textarea id="txtDesc" v-model="desc"></textarea>
+            <br><br>
+
+            <!-- LINK -->
+            <label for="txtPhoto">PHOTO:</label>
+            <input id="txtPhoto" type="text" v-model="photo">
+
+            <br><br>
+            <button v-on:click="addBird()" class="btn btn-primary">ADD BIRD</button>
+            <button @click="orderByBird" class="btn btn-primary">ALPHABETICAL ORDER</button>
+            <p>
+                Filter: <input v-model="filterName" type="text" class="form-control" placeholder="name">
+            </p>
+            <br>
+
+
+
+        </div>
+
+
+        <div class="container" style="background-color: gray;">
+            <table class="table table-sm text-left">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>NAME</th>
+                        <th>OPTIONS</th>
+
+                    </tr>
+                </thead>
+                <tbody style="background-color: white;">
+                    <tr v-for="bird in filteredBirds">
+                        <td scope="row">{{bird.id}}</td>
+                        <td>{{bird.name}}</td>
+                        <td>
+                            <button class="btn btn-primary btn-sm" @click="editBird(bird.id)">EDIT</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <br>
+
+        </div>
+
+        <div class="container" style="background-color: gray;">
+            <h3 v-if="this.birds.length===0" style="font-size: 50px; text-align: center;">NO BIRDS</h3>
+
+            <div class="row">
+                <birds-card v-for="b in birds" v-bind:bird="b">
+                </birds-card>
+
+            </div>
+        </div>
+
+        <!-- Dialog for edit castle -->
+        <dialog id="editBirdDialog">
+            <form @submit.prevent="updateBird" method="dialog">
+                <div class="row">
+                    <div class="col">
+                        <input v-model="form.editName" id="edN" type="text" class="form-control" placeholder="name" required>
+                    </div>
+                    <div class="col">
+                        <input v-model="form.editLink" id="edP" type="url" class="form-control" placeholder="photo link"
+                            required>
+                    </div>
+                    <input v-model="form.editId" type="hidden">
+                </div>
+                <br>
+                <button type="submit" class="btn btn-primary">SAVE</button>
+                <button class="btn btn-primary">CLOSE</button>
+            </form>
+        </dialog>
+
+        </dialog>
+
+    </div>
+
+
+    <!-- Optional JavaScript -->
+    <script src="birdIndex.js"></script>
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </script>
+</body>
+
+</html>

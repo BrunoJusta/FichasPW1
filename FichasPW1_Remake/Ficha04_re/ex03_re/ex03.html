@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Title</title>
+    <script src="../vue-js/vue.js"></script>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        table,
+        td,
+        th {
+            border: 1px solid black;
+            border-collapse: collapse
+        }
+    </style>
+</head>
+
+<body>
+    <div id="intro">
+        <ul>
+            <li v-for="team in listFilterTeams">
+                Name: {{team.name}} AND year: {{team.year}}
+            </li>
+        </ul>
+        <table>
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Year</th>
+            </tr>
+            <tr v-for="(team,index) in listFilterTeams">
+                <td>{{index+1}}</td>
+                <td>{{team.name}}</td>
+                <td>{{team.year}}</td>
+                <td>{{team.location}}</td>
+
+            </tr>
+        </table>
+        <button v-on:click="addTeam('Braga', 1923, 'Braga')" class="btn btn-primary">ADD TEAM</button>
+        <button v-on:click="filterTeams('Lisboa')" class="btn btn-primary">TEAMS FROM LISBOA</button>
+        <button v-on:click="filterTeams('Porto')" class="btn btn-primary">TEAMS FROM PORTO</button>
+        <button v-on:click="filterTeams('Braga')" class="btn btn-primary">TEAMS FROM BRAGA</button>
+        <button v-on:click="filterTeams('')" class="btn btn-primary">REFRESH</button>
+    </div>
+    <!-- Optional JavaScript -->
+    <script src="ex03.js"></script>
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </script>
+</body>
+
+</html>

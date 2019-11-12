@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Title</title>
+    <script src="./vue-js/vue.js"></script>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        table,
+        td,
+        th {
+            border: 1px solid black;
+            border-collapse: collapse
+        }
+    </style>
+</head>
+
+<body>
+    <div id="intro">
+        <form @submit.prevent="getReport()">
+            <!-- Tarefa-->
+            <label for="task">Tarefa:</label>
+            <input id="task" v-model="desc">
+            <br>
+            <br>
+            <!-- GÉNERO -->
+            <p>Tipo:</p>
+            <input type="radio" id="personal" value="Pessoal" v-model="type">
+            <label for="personal">Pessoal</label>
+            <br>
+            <input type="radio" id="work" value="Trabalho" v-model="type">
+            <label for="work">Trabalho</label>
+            <br>
+            <br>
+            <input type="submit" value="SUBMETER">
+        </form>
+        <dialog id="dlgReport"></dialog>
+
+        <span v-if="this.tasks.length===0">
+            SEM TAREFAS
+        </span>
+        <div v-else>
+            <span>
+                <label for="sltFilter">Filtros</label>
+                <select id="sltFilter" v-model="filter">
+                    <option value="Todos">TODOS</option>
+                    <option value="Pessoal">PESSOAL</option>
+                    <option value="Trabalho">TRABALHO</option>
+                </select>
+            </span>
+            <table>
+                <tr>
+                    <th>Tipo</th>
+                    <th>Tarefa</th>
+                    <th>Ações</th>
+                </tr>
+                <tr v-for="task in filterTasks">
+                    <td>{{task.type}}</td>
+                    <td>{{task.desc}}</td>
+                    <td><button @click="removeTask(task.id)">REMOVER</button></td>
+
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <script src="ex01.js"></script>
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </script>
+</body>
+
+</html>
